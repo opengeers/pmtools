@@ -22,3 +22,17 @@
  @media only screen and (max-width : 320px) {
         
  }
+ 
+ 
+ 
+/* -----------------------------------------------height--------------------- */
+
+
+ @media only screen and (max-height : 720px) {
+ 	
+ 	.col2container .row .task01 .table-responsive{height: 450px;overflow-y: auto;}
+ 	
+ 	
+ 	       
+ } 
+ 

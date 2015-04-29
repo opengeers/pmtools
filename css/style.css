@@ -39,6 +39,7 @@ p{display: block;margin: 0px;padding: 0px;}
 .mw100{max-width: 100px !important;}.mw200{max-width: 200px !important;}.mw300{max-width: 300px !important;}.mw400{max-width: 400px !important;}.mw500{max-width: 500px !important;}.mw600{max-width: 600px!important;}.mw700{max-width: 700px !important;}.mw800{max-width: 800px !important;}.mw900{max-width: 900px !important;}
 
 .al{text-align: left !important;}.ar{text-align: right !important;}.ac{text-align: center !important;}.aj{text-align: justify !important;}
+.vt{vertical-align:top !important;}.vm{vertical-align:middle !important;}.vb{vertical-align:bottom !important;}
 
 
 .heaerbar{background: url(../images/bodybg.png) repeat bottom center;position: fixed;width: 100%;height: 50px;overflow: hidden; left: 220px;top: 0;color: #fff;font-size: 25px;padding: 0px 230px 15px 20px;z-index: 1200;}
@@ -96,12 +97,12 @@ border-right: none;}
 .tabbar .nav.nav-tabs li.active a{background: #f4f4f4;color: #21A5B8;}
 .tabbar .nav.nav-tabs li.rightsde a i{font-size: 14px;}
 
-.project .tab-content{margin: 50px 0px 0px 0px;}
+.project .tab-content{margin: 50px 0px 20px 0px;}
 .project .tab-content .add_project .row{margin: 0px 0px 20px 0px;}
 .project .tab-content .add_project .tarea{font-size: 13px;min-height: 200px;}
 .project .tab-content .add_project .row .fld{margin: 0px 0px 3px 0px;font-weight: 400;}
 
-.project_list table{ margin: 20px 0px 20px 0px;border: 1px solid #e6e6e6;background: #fff;}
+.project_list table{ margin: 0px 0px 20px 0px;border: 1px solid #e6e6e6;background: #fff;}
 .project_list th,.project_list td{border-right: 1px solid #e6e6e6;}
 .project_list .col01,
 .project_list .col04,
@@ -109,7 +110,7 @@ border-right: none;}
 .project_list .col01,.project_list .col02{font-weight: 600;}
 .project_list table tr td{padding: 15px 10px;}
 
-.project_list table .trhead{background: #21A5B8;color: #fff;}
+.project_list table .trhead{background: #E9E9E9;color: #000;}
 
 .proj_files .input-group{margin: 0px 0px 15px 0px;}
 .proj_files .input-group .input-group-addon.in01{font-weight: 600;font-size: 20px;width: 80px;color: #fff;background: #21A5B8;text-transform: uppercase;}
@@ -123,27 +124,22 @@ border-right: none;}
 
 .proj_about{background: #fff;font-weight: 400;line-height: 23px;padding: 20px;}
 
-.proj_notes_add .row div{margin: 0px 0px 10px 0px;}
-.proj_notes_add .row div .tarea{height: 50px;}
+.proj_notes .addnote{margin: 4px;}
+.proj_notes .addnote .form-control{height: 32px;}
+.proj_notes .addnote .col03btn{padding: 0px 0px 0px 5px;}
 
-.proj_notes_list .proj_notes_list_ul{background: #fff;margin: 0px 0px 10px 0px;padding: 5px 0px 0px 10px;border: 1px solid #dedede;text-align: right;}
-.proj_notes_list .proj_notes_list_ul li.noteby01{display: block;font-size: 12px;text-align: left;padding: 0px 10px 0px 0px;}
-.proj_notes_list .proj_notes_list_ul li.noteby02{text-align: right;margin: 10px 0px 0px 0px;font-style: italic;font-size: 11px;background: #efefef;padding: 2px 10px 2px 10px;}
-
-.proj_task{background: #fff;padding: 0px 0px 0px 15px;margin: 0px;border: 1px solid #cecece;}
-.proj_task .row .task01{background: #e9e9e9;padding: 0px;line-height: 18px;border-right: 1px solid #cecece;}
-.proj_task .row .task02{}
-.proj_task .row .task01 .table-responsive{height: 600px;overflow-y: auto;}
-
-
-.proj_task table{min-width: 300px;}
-.proj_task tr th{padding: 5px; border-bottom: 1px solid #bebebe;}
-.proj_task tr.rowtd td{ border-bottom: 1px solid #dedede;}
-.proj_task td{padding: 7px 5px;text-align: center;background: #fff;color: #1a1a1a;transition: all 0.3s ease-in-out;font-size: 12px;}
-.proj_task tr.rowtd.active td{background: #e5f4fd;}
-.proj_task td .task_inf{color: #888888;text-align: right;font-size: 10px;}
-.proj_task td .task_inf span{display: inline-block;padding: 0px 5px 0px 5px;}
-.proj_task td .task_inf span a{color: #21A5B8;cursor: pointer;}
+.col2container{background: #fff;padding: 0px 0px 0px 15px;margin: 0px;border: 1px solid #cecece;}
+.col2container .row .task01{background: #e9e9e9;padding: 0px;line-height: 18px;border-right: 1px solid #cecece;}
+.col2container .row .task02{}
+.col2container .row .task01 .table-responsive{height: 600px;overflow-y: auto;}
+.col2container table{width: 100%;}
+.col2container tr th{padding: 5px; border-bottom: 1px solid #bebebe;}
+.col2container tr.rowtd td{ border-bottom: 1px solid #dedede;}
+.col2container td{padding: 7px 5px;text-align: center;background: #fff;color: #1a1a1a;transition: all 0.3s ease-in-out;font-size: 12px;}
+.col2container tr.rowtd.active td{background: #e5f4fd;}
+.col2container td .task_inf{color: #888888;text-align: right;font-size: 10px;}
+.col2container td .task_inf span{display: inline-block;padding: 0px 5px 0px 5px;}
+.col2container td .task_inf span a{color: #21A5B8;cursor: pointer;}
 
 .taskalldiv{background: #e9e9e9;}
 .taskalldiv .tblcell{padding: 5px;vertical-align: middle;}

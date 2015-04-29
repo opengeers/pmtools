@@ -45,35 +45,53 @@ $result=$db->getResult();
                 </div>
 			<? }?>
             <? if($show=='Notes'){?>
-            	<div class="proj_notes">
-                	<div class="proj_notes_add">
-                        <form id="form1" action="<?=SITE_URL?>/process.php" method="post" enctype="multipart/form-data">
-                        <input type="hidden" name="action" value="proj_note_add">
-                        <input type="hidden" name="ref_url" value="<?=$db->encoded(URL_FULL)?>" />
-                        <div class="row">
-                            <div class="col-sm-12 val"><textarea name="note" value="" class="form-control tarea" data-bvalidator="required" data-bvalidator-msg="Please enter some note." placeholder="Enter your note here...."></textarea></div>
+            	<div class="proj_notes col2container">
+					<div class="row">
+                    	<div class="col-sm-5 task01">
+                        	<div class="proj_task_list">
+<?
+$db->select('post_meta','*','','meta_key="proj_note" AND postid="'.$result[0]['id'].'"','','');
+$result_notes=$db->getResult();
+?>						
+<div class="addnote col2hd">
+    <form id="form1" action="" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="action" value="">
+    <input type="hidden" name="ref_url" value="<?=$db->encoded(URL_FULL)?>" />
+    <ul class="tbl">
+        <li class="tblcell col02">
+        	<input type="text" class="form-control" placeholder="Search note here..."/>
+        </li>
+        <li class="tblcell w50 al vm col03btn"><button type="submit" class="btn btn-default btn-sm"><i class="fa fa-search"></i></button></li>
+        <li class="tblcell w50 ar vm col04"><a class="btn btn-info btn-sm"><i class="fa fa-plus-circle"></i> Note</a></li>
+    </ul>  
+    </form>  
+</div>		
+<div class="table-responsive">
+    <table id="table-5" cellspacing="0" cellpadding="2">
+        <? $i=0;foreach($result_notes as $key => $val){$i++;?>
+            <tr id="<?=$result_notes[$key]['id']?>" class="rowtd <?=($key==1)?'active':''?>">
+                <td class="al">
+				<?=substr($result_notes[$key]['meta_value'],0,120)?><?=(strlen($result_notes[$key]['meta_value'])>120)?'...':''?>
+                <p class="task_inf">
+                    <span>Notes by - <?=$result_notes[$key]['userid']?></span> |
+                    <span><?=date('D, d m Y h:i:s',strtotime($result_notes[$key]['date']))?></span>
+                </p>
+                </td>
+            </tr>
+        <? }?>
+    </table>
+</div>
+        
+                            </div>
                         </div>
-                        <div class="row">
-                            <div class="col-sm-12 val"><button class="btn btn-info" name="" type="submit">Submit</button></div>
+                        <div class="col-sm-7 task02">
+                        	
                         </div>
-                        </form>
-                    </div>
-                    <div class="proj_notes_list">
-					<?
-					$db->select('post_meta','*','','meta_key="proj_note" AND postid="'.$result[0]['id'].'"','','');
-					$result_note=$db->getResult();
-					foreach($result_note as $key => $val){
-					?>
-						  <ul class="proj_notes_list_ul">
-                          	<li class="noteby01"><?=$result_note[$key]['meta_value']?></li>
-                            <li class="noteby02">Notes by : <?=$result_note[$key]['userid']?> on <?=date('D, d M Y / h:i:s',strtotime($result_note[$key]['date']))?> </li>
-                          </ul>	                  
-                    <? }?>
                     </div>
                 </div>
 			<? }?>
             <? if($show=='Tasks'){?>
-            	<div class="proj_task">
+            	<div class="proj_task col2container">
 					<div class="row">
                     	<div class="col-sm-5 task01">
                         	<div class="proj_task_list">
@@ -81,9 +99,9 @@ $result=$db->getResult();
 $db->select('post_meta','*','','meta_key="proj_note" AND postid="'.$result[0]['id'].'"','','');
 $result_task=$db->getResult();
 ?>						
-<div class="taskalldiv">
+<div class="taskalldiv col2hd">
 	<ul class="tbl">
-    	<li class="tblcell col01 w50 ac"><input type="checkbox" /></li>
+    	<li class="tblcell col01 w25 ac"><input type="checkbox" /></li>
         <li class="tblcell w100 col02">
         	<select class="form-control">
             	<option value="">Select...</option>
@@ -105,9 +123,9 @@ $result_task=$db->getResult();
         </tr><?php */?>
         <? $i=0;foreach($result_task as $key => $val){$i++;?>
             <tr id="<?=$result_task[$key]['id']?>" class="rowtd <?=($key==1)?'active':''?>">
-                <td class="w50 ac"><input type="checkbox" /></td>
+                <td class="w20 ac vt"><input type="checkbox" /></td>
                 <td class="al">
-				<?=substr($result_task[$key]['meta_value'],0,150)?><?=(strlen($result_task[$key]['meta_value'])>150)?'...':''?>
+				<?=substr($result_task[$key]['meta_value'],0,120)?><?=(strlen($result_task[$key]['meta_value'])>120)?'...':''?>
                 <p class="task_inf">
                 	<span><a><i class="fa fa-plus-circle"></i> Sub Task</a></span> |
                     <span>ID - <?=$result_task[$key]['id']?></span> | 
@@ -131,3 +149,4 @@ $result_task=$db->getResult();
       </div>
     </div>
 </div>
+
