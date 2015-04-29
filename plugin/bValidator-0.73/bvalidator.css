@@ -1,0 +1,20 @@
+/* invalid input */
+.bvalidator_invalid {
+	border: 1px solid #f5c3d5;
+}
+/* error message */
+.bvalidator_errmsg {
+	z-index: 1;font-size: 12px;
+	color: #D42461;font-style: italic;
+	font-weight: 400;
+	display: none;
+}
+/* close icon */
+.bvalidator_errmsg .bvalidator_close_icon {
+	margin-left: 5px;
+	margin-top: -2px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	color: #F96;
+	cursor: pointer;
+}

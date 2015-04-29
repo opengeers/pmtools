@@ -1,0 +1,32 @@
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript" src="jquery.zclip.js"></script>
+<script>
+	$(document).ready(function(){
+
+    $('a#copy-description').zclip({
+        path:'ZeroClipboard.swf',
+        copy:$('p#description').text()
+    });
+
+    // The link with ID "copy-description" will copy
+    // the text of the paragraph with ID "description"
+
+
+    $('a#copy-dynamic').zclip({
+        path:'ZeroClipboard.swf',
+        copy:function(){return $('input#dynamic').val();}
+    });
+
+    // The link with ID "copy-dynamic" will copy the current value
+    // of a dynamically changing input with the ID "dynamic"
+
+});
+</script>
+
+
+<a id="copy-dynamic">copy-dynamic</a>
+<input id="dynamic" value="ssssssssssssss">
+
+<a id="copy-description">copy-description</a>
+<p id="description">pppppppppp</p>
+
