@@ -53,7 +53,7 @@ switch ($action_ajax){
 			foreach($result_files as $key => $val){
 			$fl_type=explode('.',strrev($result_files[$key]['name']));	
 			?>
-				<div class="input-group ">
+				<div class="input-group">
 				  <span class="input-group-addon in01"><?=strrev($fl_type[0])?></span>
 				  <input type="text" class="form-control fl01" readonly aria-label="Amount (to the nearest dollar)" value="<?=$result_files[$key]['name']?>">
 				  <span class="input-group-addon in02"><i class="fa fa-download"></i></span>

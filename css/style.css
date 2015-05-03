@@ -132,13 +132,13 @@ border-right: none;}
 .col2container{background: #fff;padding: 0px 0px 0px 15px;margin: 0px;border: 1px solid #cecece;}
 .col2container .row .task01{background: #e9e9e9;padding: 0px;line-height: 18px;border-right: 1px solid #cecece;}
 .col2container .row .task02{padding: 10px 30px 20px 10px;}
-.col2container .row .task01 .table-responsive{height: 600px;overflow-y: auto;}
+.col2container .row .task01 .table-responsive{height: 590px;overflow-y: auto;}
 .col2container table{width: 100%;}
 .col2container tr th{padding: 5px; border-bottom: 1px solid #bebebe;}
 .col2container tr.rowtd td{ border-bottom: 1px solid #dedede;}
-.col2container td{padding: 7px 5px 0px 5px;text-align: center;background: #fff;color: #1a1a1a;transition: all 0.3s ease-in-out;font-size: 12px;}
+.col2container td{padding: 10px 5px 0px 5px;text-align: center;background: #fff;color: #1a1a1a;transition: all 0.3s ease-in-out;font-size: 14px;}
 .col2container tr.rowtd.active td{background: #e5f4fd;}
-.col2container td .task_inf{color: #888888;text-align: left;font-size: 10px;font-style: italic;}
+.col2container td .task_inf{color: #b0b0b0;text-align: right;font-size: 10px;font-style: italic;display: block;margin: 5px 0px 0px 0px;}
 .col2container td .task_inf span{display: inline-block;padding: 0px 0px 0px 0px;}
 .col2container td .task_inf span a{color: #21A5B8;cursor: pointer;}
 

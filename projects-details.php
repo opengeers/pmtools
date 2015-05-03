@@ -93,7 +93,7 @@ $result_notes=$db->getResult();
             <? if($show=='Tasks'){?>
             	<div class="proj_task col2container">
 					<div class="row">
-                    	<div class="col-sm-4 task01">
+                    	<div class="col-sm-5 task01">
                         	<div class="proj_task_list">
 <?
 $db->select('post','*','','type="task" AND status="publish" AND parentid="'.$result[0]['id'].'"','id DESC','');
@@ -149,7 +149,7 @@ if($max>0){
         
                             </div>
                         </div>
-                        <div class="col-sm-8 task02">
+                        <div class="col-sm-7 task02">
                         	<div class="col2result" id="col2result">
                             	
                             </div>
