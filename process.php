@@ -49,34 +49,40 @@ switch ($action){
 	break;
 
 	
-	case 'savesite':
+	case 'task_add':
 		$arvalue['name']=$db->escapeString($_POST['name']);
 		$arvalue['content']=$db->escapeString($_POST['content']);
-		$arvalue['type']='site_client';
-		$arvalue['status']='publish';
+		$arvalue['proj_estimation_hr']=$db->escapeString($_POST['proj_estimation_hr']);
 		$arvalue['date']=DATE;		
-		$arvalue['userid']=$user[0]['id'];
+		$arvalue['type']='task';
+		$arvalue['status']='publish';
+		$arvalue['userid']='1';
+		$arvalue['parentid']=$_SESSION['proj_id'];		
 		$db->insert('post',$arvalue); // insert into database		
-		$_SESSION['msg']='Site has been saved successfully.';
+		$result=$db->getResult();		
+		//Upload profile picture
+		foreach ($_FILES["proj_files"]["error"] as $key => $error) {
+			if ($error != 4) {
+			$tmp_name = $_FILES["proj_files"]["tmp_name"][$key];
+			$name = time().$_FILES["proj_files"]["name"][$key];
+			$typeimg=strtolower(end(explode('.',$name)));
+				if($typeimg!='.php' || $typeimg!='exe' || $typeimg!='.net'){
+					move_uploaded_file($tmp_name, "upload/$name");	
+					$array=array('postid'=>$result[0],'name'=>$name,'path'=>'upload','type'=>
+					'task_files','date'=>DATE,'ip'=>IP,'status'=>'publish');
+					$db->insert("post_files",$array);	
+					$photocount++;
+					$_SESSION['error']=0;
+				}else{
+					$photocounterror++;
+					$_SESSION['error']=1;	
+				}
+			}
+		}
+		
+		$_SESSION['msg']='Task has been added successfully.';
 		$_SESSION['error']=0;
-		$db->redirect($ref_url);
-	break;
-	
-	case 'updatesite':
-		$arvalue['name']=$db->escapeString($_POST['name']);
-		$arvalue['content']=$db->escapeString($_POST['content']);
-		$site_client_id=$db->escapeString($_POST['site_client_id']);
-		$db->update('post',$arvalue,'id='.$site_client_id.''); // update into database		
-		//echo $db->getSql();
-		$_SESSION['msg']='Site has been updated successfully.';
-		$_SESSION['error']=0;
-		$db->redirect($ref_url);
-	break;
-	
-	case 'delect_site_client':		
-		$site_client_ids=$_POST['site_client_ids'];	
-		$db->delete('post','id in ("'.implode('","',array_values($site_client_ids)).'")');
-		$db->redirect($ref_url);
+		$db->redirect($ref_url);	
 	break;
 	
 	case 'proj_note_add':

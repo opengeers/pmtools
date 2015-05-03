@@ -38,12 +38,12 @@ $result=$db->getResult();
                     </div>	
 				<? }?>
             </div>    
-			<? }?>
+			<? }else?>
             <? if($show=='About'){?>
             	<div class="proj_about">
 					<?=nl2br($result[0]['content'])?>
                 </div>
-			<? }?>
+			<? }else?>
             <? if($show=='Notes'){?>
             	<div class="proj_notes col2container">
 					<div class="row">
@@ -89,15 +89,15 @@ $result_notes=$db->getResult();
                         </div>
                     </div>
                 </div>
-			<? }?>
+			<? }else?>
             <? if($show=='Tasks'){?>
             	<div class="proj_task col2container">
 					<div class="row">
-                    	<div class="col-sm-5 task01">
+                    	<div class="col-sm-4 task01">
                         	<div class="proj_task_list">
 <?
-$db->select('post_meta','*','','meta_key="proj_note" AND postid="'.$result[0]['id'].'"','','');
-$result_task=$db->getResult();
+$db->select('post','*','','type="task" AND status="publish" AND parentid="'.$result[0]['id'].'"','id DESC','');
+$max=$db->numRows();
 ?>						
 <div class="taskalldiv col2hd">
 	<ul class="tbl">
@@ -112,35 +112,47 @@ $result_task=$db->getResult();
             </select>
         </li>
         <li class="tblcell col02"><button class="btn btn-info btn-xs">Apply</button></li>
-        <li class="tblcell ac w100 col03 newtaskbtn"><i class="fa fa-plus-circle"></i> New Task</li>
+        <li class="tblcell ac w100 col03 newtaskbtn cp" data-toggle="modal" data-target="#ajax_modal"
+        onclick="show_task_det('','','ajax_modal_result','task_add')"        
+        ><i class="fa fa-plus-circle"></i> New Task</li>
     </ul>    
-</div>		
+</div>	
 <div class="table-responsive">
+<?
+if($max>0){
+	$result_task=$db->getResult();	
+?>
     <table id="table-5" cellspacing="0" cellpadding="2">
         <?php /*?><tr>
             <th class="w50 ac"><input type="checkbox" /></th>
             <th class="al">Title</th>
         </tr><?php */?>
         <? $i=0;foreach($result_task as $key => $val){$i++;?>
-            <tr id="<?=$result_task[$key]['id']?>" class="rowtd <?=($key==1)?'active':''?>">
+            <tr id="tasktr<?=$result_task[$key]['id']?>" class="rowtd <?=($key==0)?'active':''?>" >
                 <td class="w20 ac vt"><input type="checkbox" /></td>
-                <td class="al">
-				<?=substr($result_task[$key]['meta_value'],0,120)?><?=(strlen($result_task[$key]['meta_value'])>120)?'...':''?>
+                <td class="al cd" onclick="show_task_det('<?=$result_task[$key]['id']?>','tasktr<?=$result_task[$key]['id']?>','col2result','task_details_ajax')">
+				<?=substr($result_task[$key]['name'],0,120)?><?=(strlen($result_task[$key]['name'])>120)?'...':''?>
                 <p class="task_inf">
-                	<span><a><i class="fa fa-plus-circle"></i> Sub Task</a></span> |
-                    <span>ID - <?=$result_task[$key]['id']?></span> | 
-                    <span>Total time : 154hr.</span>
+                    <span># <?=$result_task[$key]['id']?></span> | 
+                    <span><?=$result_task[$key]['proj_estimation_hr']?> Hr.</span> |
+                    <span><?=date('D, d M Y h:i:s',strtotime($result_task[$key]['date']))?></span>
                 </p>
                 </td>
             </tr>
         <? }?>
     </table>
+<? }else{?>
+	<div class="nodata">You have no task.</div>
+<? }?>
 </div>
+
         
                             </div>
                         </div>
-                        <div class="col-sm-7 task02">
-                        	
+                        <div class="col-sm-8 task02">
+                        	<div class="col2result" id="col2result">
+                            	
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -149,4 +161,34 @@ $result_task=$db->getResult();
       </div>
     </div>
 </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="ajax_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" id="ajax_modal_result"></div>
+  </div>
+</div>
+
+
+<div class="ajax_loader" id="ajax_loader"><i class="fa fa-circle-o-notch fa-spin"></i> Loading...</div>
+<script>
+	function show_task_det(id,div,resdiv,action){
+		$('.rowtd').removeClass('active');
+		$('#'+div).addClass('active');
+		$("#ajax_loader").fadeIn("fast");
+		$.ajax({url:"<?=SITE_URL?>/ajax.php",
+			type: "POST",
+			data: {
+				action_ajax : action,
+				id : id
+			},
+			success:function(result){
+				$("#"+resdiv).html(result);
+				$("#ajax_loader").fadeOut("fast");
+			}
+		});
+	}
+</script>
+
 

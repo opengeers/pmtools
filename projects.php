@@ -62,7 +62,9 @@
             $where = '( `name` LIKE "%'.$user_search_key.'%" OR content LIKE "%'.$user_search_key.'%" ) AND ';	
             }
             $where .= 'status="publish" AND type="project"';
-            $db->select('post','*','',$where,'name ASC',''); ?>
+            $db->select('post','*','',$where,'name ASC',''); 
+            $max=$db->numRows();
+            if($max>0){?>
             	<table class="table">
                     <tr class="trhead">
                       <th class="col01">ID#</th>
@@ -72,8 +74,6 @@
                       <th class="col05">Action</th>
                     </tr>
             <?
-            $max=$db->numRows();
-            if($max>0){
             $result=$db->getResult();
             foreach($result as $key => $val){
             ?>
@@ -81,7 +81,7 @@
                       <td class="col01"><?=$result[$key]['id']?></td>
                       <td class="col02"><a href="<?=SITE_URL?>/projects-details?proj_id=<?=$db->encoded($result[$key]['id'])?>&show=Tasks"><?=$result[$key]['name']?></a></td>
                       <td class="col03"><?=substr($result[$key]['content'],0,100)?> <?=(strlen($result[$key]['content'])>200)?'.....':''?></td>
-                      <td class="col04"><?=date('D, d M Y',strtotime($result[$key]['proj_start_date']))?></td>
+                      <td class="col04"><?=date('D, d M Y',strtotime($result[$key]['date']))?></td>
                       <td class="col05">
                         <div class="action">                            
                             <?php /*?><div class="panel panel-default actionpopup">
@@ -114,8 +114,11 @@
                         </div>            
                       </td>
                     </tr>
-            <? }}?>        
+            <? }?>        
                   </table>
+            <? }else{?>
+            	<div class="nodata">You have no project, Please add new project by click on above "Add" link.</div>
+            <? }?>    
             </div>
             </div>
             <? }?>            
