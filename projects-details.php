@@ -129,14 +129,14 @@ if($max>0){
         </tr><?php */?>
         <? $i=0;foreach($result_task as $key => $val){$i++;?>
             <tr id="tasktr<?=$result_task[$key]['id']?>" class="rowtd <?=($key==0)?'active':''?>" >
-                <td class="w20 ac vt"><input type="checkbox" /></td>
-                <td class="al cd" onclick="show_task_det('<?=$result_task[$key]['id']?>','tasktr<?=$result_task[$key]['id']?>','col2result','task_details_ajax')">
-				<?=substr($result_task[$key]['name'],0,120)?><?=(strlen($result_task[$key]['name'])>120)?'...':''?>
-                <p class="task_inf">
+                <td class="w25 ac vt"><input type="checkbox" /></td>
+                <td class="al cp taski<?=$i?>" onclick="show_task_det('<?=$result_task[$key]['id']?>','tasktr<?=$result_task[$key]['id']?>','col2result','task_details_ajax')">
+				[#<?=$result_task[$key]['id']?>] - <?=substr($result_task[$key]['name'],0,120)?><?=(strlen($result_task[$key]['name'])>120)?'...':''?>
+                <?php /*?><p class="task_inf">
                     <span># <?=$result_task[$key]['id']?></span> | 
                     <span><?=$result_task[$key]['proj_estimation_hr']?> Hr.</span> |
                     <span><?=date('D, d M Y h:i:s',strtotime($result_task[$key]['date']))?></span>
-                </p>
+                </p><?php */?>
                 </td>
             </tr>
         <? }?>
@@ -189,6 +189,8 @@ if($max>0){
 			}
 		});
 	}
+	$( ".taski1" ).trigger( "click" );
+	$("#ajax_loader").fadeOut("fast");
 </script>
 
 

@@ -1,10 +1,13 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic);
 html{height: 100%;margin: 0;transition: all 0.5s ease-in-out;}
 body{height: 100%;margin:0px !important; padding:0px !important; 
-font-family:'Open Sans'; font-size:13px; font-weight: 400; color:#4f4f4f;text-decoration:none;background:#f4f4f4;line-height: 16px; transition: all 0.2s ease-in-out;
+font-family:'Open Sans'; font-size:12px; font-weight: 400; color:#4f4f4f;text-decoration:none;background:#f4f4f4;line-height: 16px; transition: all 0.2s ease-in-out;
 }
 
-textarea,select,input{font-family:'Open Sans';font-size: 13px;color: #000;outline: none;background-color: #fff;border: 1px solid #cacaca;padding: 5px;line-height: 16px;}
+textarea,select,input{font-family:'Open Sans';font-size: 13px !important;color: #000;outline: none;background-color: #fff;border: 1px solid #cacaca;padding: 5px;line-height: 16px;}
+textarea{min-height: 100px !important;}
+strong{font-weight: 600;}
+
 select{padding: 3px;font-family: 'Open Sans';}
 a{outline: none;font-family: 'Open Sans';text-decoration: none;color:#000; }
 a:hover,a:focus{outline: none;text-decoration: none;}
@@ -37,6 +40,10 @@ p{display: block;margin: 0px;padding: 0px;}
 
 .w25{width: 25px !important;}.w50{width: 50px !important;}.w75{width: 75px !important;}.w100{width: 100px !important;}.w200{width: 200px !important;}.w300{width: 300px !important;}.w400{width: 400px !important;}.w500{width: 500px !important;}.w600{width: 600px!important;}.w700{width: 700px !important;}.w800{width: 800px !important;}.w900{width: 900px !important;}
 .mw100{max-width: 100px !important;}.mw200{max-width: 200px !important;}.mw300{max-width: 300px !important;}.mw400{max-width: 400px !important;}.mw500{max-width: 500px !important;}.mw600{max-width: 600px!important;}.mw700{max-width: 700px !important;}.mw800{max-width: 800px !important;}.mw900{max-width: 900px !important;}
+
+.h25{min-height: 25px !important;}.h50{min-height: 50px !important;}.h75{min-height: 75px !important;}.h100{min-height: 100px !important;}
+.h150{min-height: 150px !important;}.h200{min-height: 200px !important;}
+
 
 .al{text-align: left !important;}.ar{text-align: right !important;}.ac{text-align: center !important;}.aj{text-align: justify !important;}
 .vt{vertical-align:top !important;}.vm{vertical-align:middle !important;}.vb{vertical-align:bottom !important;}
@@ -100,7 +107,7 @@ border-right: none;}
 
 .project .tab-content{margin: 50px 0px 20px 0px;}
 .project .tab-content .add_project .row{margin: 0px 0px 20px 0px;}
-.project .tab-content .add_project .tarea{font-size: 13px;min-height: 200px;}
+.project .tab-content .add_project .tarea{min-height: 200px;}
 .project .tab-content .add_project .row .fld{margin: 0px 0px 3px 0px;font-weight: 400;}
 
 .project_list table{ margin: 0px 0px 20px 0px;border: 1px solid #e6e6e6;background: #fff;}
@@ -131,14 +138,16 @@ border-right: none;}
 
 .col2container{background: #fff;padding: 0px 0px 0px 15px;margin: 0px;border: 1px solid #cecece;}
 .col2container .row .task01{background: #e9e9e9;padding: 0px;line-height: 18px;border-right: 1px solid #cecece;}
-.col2container .row .task02{padding: 10px 30px 20px 10px;}
+.col2container .row .task02{padding: 0px 30px 0px 10px;}
 .col2container .row .task01 .table-responsive{height: 590px;overflow-y: auto;}
+.col2container .row .task02 .col2result{height: 625px;overflow-y: auto;padding: 10px;}
+
 .col2container table{width: 100%;}
 .col2container tr th{padding: 5px; border-bottom: 1px solid #bebebe;}
-.col2container tr.rowtd td{ border-bottom: 1px solid #dedede;}
-.col2container td{padding: 10px 5px 0px 5px;text-align: center;background: #fff;color: #1a1a1a;transition: all 0.3s ease-in-out;font-size: 14px;}
+.col2container tr.rowtd td{ border-top: 1px solid #ebebeb;}
+.col2container td{padding: 10px 5px 10px 5px;text-align: center;background: #fff;color: #1a1a1a;transition: all 0.3s ease-in-out;font-size: 13px;}
 .col2container tr.rowtd.active td{background: #e5f4fd;}
-.col2container td .task_inf{color: #b0b0b0;text-align: right;font-size: 10px;font-style: italic;display: block;margin: 5px 0px 0px 0px;}
+.col2container td .task_inf{color: #b0b0b0;text-align: left;font-size: 10px;font-style: italic;display: block;margin: 5px 0px 0px 0px;}
 .col2container td .task_inf span{display: inline-block;padding: 0px 0px 0px 0px;}
 .col2container td .task_inf span a{color: #21A5B8;cursor: pointer;}
 
@@ -147,8 +156,7 @@ border-right: none;}
 .taskalldiv .form-control{height: 25px; width: 150px;font-size: 11px;padding: 2px;}
 .taskalldiv .newtaskbtn{color: #21A5B8;font-weight: 600;}
 
-.ajax_loader{position: fixed;width: 150px;text-align: center;padding: 20px 0px;left: 50%;top: 50%;background: #21A5B8;color: #fff;font-size: 20px;margin: 0px 0px 0px -75px;
-display: none;border-radius: 7px;}
+.ajax_loader{position: fixed;width: 150px;text-align: center;padding: 10px 0px;left: 50%;top: 5px;background: #21A5B8;color: #fff;font-size: 20px;margin: 0px 0px 0px -75px;z-index: 1200;display: none;border-radius: 5px;}
 
 .modaldata .row{margin: 10px 0px 15px 0px;padding: 0;}
 .modaldata .row div{padding: 0;}
@@ -178,11 +186,18 @@ display: none;border-radius: 7px;}
     display: block;
 }
 .nodata{text-align: center;background: #fff;padding: 20px;color: #c9c9c9;font-size: 15px;font-weight: 300;font-style: italic;}
-.col2result{}
 .task_name01{font-size: 18px;font-weight: 600;margin: 0px 0px 10px 0px;}
 .task_name02{margin: 0px 0px 20px 0px;}
 .task_name04{font-size: 15px;font-weight: 600;margin: 20px 0px 10px 0px;}
 .task_details_ajax .input-group{margin: 0px 0px 10px 0px;}
-.task_details_ajax .input-group .in01{margin: 0px 0px 4px 0px;font-weight: 600;font-size: 20px;width: 80px;color: #fff;background: #21A5B8;text-transform: uppercase;}
-.task_details_ajax .input-group .fl01{background: #fff;}
+.task_details_ajax .input-group .in01{margin: 0px 0px 4px 0px;font-weight: 600;font-size: 15px;width: 80px;text-transform: uppercase;}
+.task_details_ajax .input-group .fl01{background: #fff;font-size: 11px;}
 
+.task_setting{border: 1px solid #CCCCCC;box-shadow: none;margin: 0px -1px 0px 0px;}
+.task_setting li a{padding: 5px;}
+.fld{font-weight: 600 !important;}
+
+.commentlst{margin: 10px 0px 20px 0px;border-radius: 5px;background: #f0f9fd;padding: 5px;font-size: 12px;}
+.commentlst strong{display: block;margin: 0px 0px 5px 0px;}
+.commentlst p{margin: 5px 0px 0px 0px;}
+.commentlst .taskfl{font-style: italic;}

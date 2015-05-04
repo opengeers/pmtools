@@ -31,6 +31,7 @@
  @media only screen and (max-height : 720px) {
  	
  	.col2container .row .task01 .table-responsive{height: 450px;overflow-y: auto;}
+ 	.col2container .row .task02 .col2result{height: 485px;overflow-y: auto;}
  	
  	
  	       
