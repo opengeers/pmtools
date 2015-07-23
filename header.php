@@ -18,7 +18,7 @@ if(isset($_GET['pageno']) && $_GET['pageno']!=''){$pageno=$_GET['pageno'];}
 <!DOCTYPE html>
 <html>
 <head>
-<title>Video Bandwidth Protector - <?=(URL=='')?'Home':URL?></title>
+<title>Project Management Tools - <?=(URL=='')?'Home':URL?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="shortcut icon" href="<?=SITE_URL?>/images/favicon.ico" />

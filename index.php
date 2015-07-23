@@ -1,6 +1,6 @@
 <?php include 'header.php';?>
 <div class="leftbar">
-	<div class="logo">Cre8iveLabs</div>
+	<div class="logo">Opengeers...</div>
     
     <!-- Single button menu -->
     <div class="btn-group btn-block">

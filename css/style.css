@@ -138,14 +138,14 @@ border-right: none;}
 
 .col2container{background: #fff;padding: 0px 0px 0px 15px;margin: 0px;border: 1px solid #cecece;}
 .col2container .row .task01{background: #e9e9e9;padding: 0px;line-height: 18px;border-right: 1px solid #cecece;}
-.col2container .row .task02{padding: 0px 30px 0px 10px;}
+.col2container .row .task02{padding: 0px 14px 0px 10px;}
 .col2container .row .task01 .table-responsive{height: 590px;overflow-y: auto;}
 .col2container .row .task02 .col2result{height: 625px;overflow-y: auto;padding: 10px;}
 
 .col2container table{width: 100%;}
 .col2container tr th{padding: 5px; border-bottom: 1px solid #bebebe;}
 .col2container tr.rowtd td{ border-top: 1px solid #ebebeb;}
-.col2container td{padding: 10px 5px 10px 5px;text-align: center;background: #fff;color: #1a1a1a;transition: all 0.3s ease-in-out;font-size: 13px;}
+.col2container td{padding: 5px 5px 5px 5px;text-align: center;background: #fff;color: #1a1a1a;transition: all 0.3s ease-in-out;font-size: 12px;font-weight: 600;}
 .col2container tr.rowtd.active td{background: #e5f4fd;}
 .col2container td .task_inf{color: #b0b0b0;text-align: left;font-size: 10px;font-style: italic;display: block;margin: 5px 0px 0px 0px;}
 .col2container td .task_inf span{display: inline-block;padding: 0px 0px 0px 0px;}
@@ -166,27 +166,8 @@ border-right: none;}
 .modal-header h4{font-weight: 600;font-size: 14px;color: #fff;}
 .modal-header .close{color: #fff !important;opacity: 1;}
 
-.btn-file {
-    position: relative;
-    overflow: hidden;
-}
-.btn-file input[type=file] {
-    position: absolute;
-    top: 0;
-    right: 0;
-    min-width: 100%;
-    min-height: 100%;
-    font-size: 100px;
-    text-align: right;
-    filter: alpha(opacity=0);
-    opacity: 0;
-    outline: none;
-    background: white;
-    cursor: inherit;
-    display: block;
-}
 .nodata{text-align: center;background: #fff;padding: 20px;color: #c9c9c9;font-size: 15px;font-weight: 300;font-style: italic;}
-.task_name01{font-size: 18px;font-weight: 600;margin: 0px 0px 10px 0px;}
+.task_name01{font-size: 18px;font-weight: 600;margin: 0px 0px 10px 0px;line-height: 25px;}
 .task_name02{margin: 0px 0px 20px 0px;}
 .task_name04{font-size: 15px;font-weight: 600;margin: 20px 0px 10px 0px;}
 .task_details_ajax .input-group{margin: 0px 0px 10px 0px;}
@@ -200,4 +181,9 @@ border-right: none;}
 .commentlst{margin: 10px 0px 20px 0px;border-radius: 5px;background: #f0f9fd;padding: 5px;font-size: 12px;}
 .commentlst strong{display: block;margin: 0px 0px 5px 0px;}
 .commentlst p{margin: 5px 0px 0px 0px;}
-.commentlst .taskfl{font-style: italic;}
+.commentlst .taskfl{color: #21A5B8;}
+.taskfiles{margin: 0px 0px 10px 0px;color: #21A5B8;font-size: 15px;}
+.subtasklst td{font-size: 12px;color: gray;background: #f9f9f9;padding: 3px;font-weight: 300;}
+.subtasklst td.tastdl{padding: 1px 0px 1px 5px;}
+.subtasklst td.tastdl i.fa-level-up{transform: rotate(90deg);}
+

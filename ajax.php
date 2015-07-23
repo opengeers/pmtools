@@ -8,15 +8,17 @@ $user=$db->getResult();
 $action_ajax=$_REQUEST['action_ajax'];
 switch ($action_ajax){
 	case 'task_add':
+	$id=$_REQUEST['id'];
 	?>	
       <div class="modal-header">
         <button type="button"class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Create new task</h4>
+        <h4 class="modal-title" id="myModalLabel"><? if($id!=''){?>Add sub task  under #<?=$id?><? }else{?>Create new task<? }?></h4>
       </div>
       <div class="modal-body modaldata">
         	<form id="form1" action="<?=SITE_URL?>/process.php" method="post" enctype="multipart/form-data">
             <input type="hidden" name="action" value="task_add">
-            <input type="hidden" name="ref_url" value="<?=$db->encoded(SITE_URL.'/projects-details?show=Tasks')?>" />
+            <input type="hidden" name="id" value="<?=$id?>" />
+            <input type="hidden" name="ref_url" value="<?=$db->encoded(SITE_URL.'/projects-details?show=Tasks&id='.$id.'')?>" />
               <div class="row">
                   <div class="col-sm-12 fld">Title</div>
                   <div class="col-sm-12 val"><input type="text" name="name" class="form-control" id="recipient-name" placeholder="Task title..." data-bvalidator="required" data-bvalidator-msg="Please enter task title."></div>
@@ -51,7 +53,10 @@ switch ($action_ajax){
                     <i class="fa fa-plus-circle"></i> Action
                   </div>
                   <ul class="dropdown-menu btn-block task_setting">
-                    <li><a class="" data-toggle="modal" data-target="#ajax_modal" onclick="show_task_det('<?=$result_task[0]['id']?>','','ajax_modal_result','task_edit')"  ><i class="fa fa-pencil"></i> Edit</a></li>
+                    <li><a class="" data-toggle="modal" data-target="#ajax_modal" onclick="show_task_det('<?=$result_task[0]['id']?>','tasktr<?=$result_task[0]['id']?>','ajax_modal_result','task_edit')"  ><i class="fa fa-pencil"></i> Edit</a></li>
+                    <? if($result_task[0]['parentid_task']==0){?>
+                    <li><a class="" data-toggle="modal" data-target="#ajax_modal" onclick="show_task_det('<?=$result_task[0]['id']?>','tasktr<?=$result_task[0]['id']?>','ajax_modal_result','task_add')" ><i class="fa fa-hand-o-right"></i> Add Sub Task</a></li>
+                    <? }?>
                     <li><a class=""><i class="fa fa-hand-o-right"></i> Assign</a></li>
                     <li><a class=""><i class="fa fa-check-square-o"></i> Mark as Completed</a></li>
                   </ul>
@@ -65,17 +70,22 @@ switch ($action_ajax){
 			foreach($result_files as $key => $val){
 			$fl_type=explode('.',strrev($result_files[$key]['name']));	
 			?>
-				<div class="input-group">
+				<p class="taskfiles">
+                	<i class="fa fa-paperclip"></i> <?=$result_files[$key]['name']?> 
+                	<a href="" class="btn btn-default btn-xs" ><i class="fa fa-download"></i></a>
+                    <a href="" class="btn btn-default btn-xs"><i class="fa fa-trash"></i></a>
+                </p>
+                <?php /*?><div class="input-group">
 				  <span class="input-group-addon in01"><i class="fa fa-file"></i> <?=strrev($fl_type[0])?></span>
 				  <input type="text" class="form-control fl01" readonly aria-label="Amount (to the nearest dollar)" value="<?=$result_files[$key]['name']?>">
 				  <span class="input-group-addon in02"><i class="fa fa-download"></i></span>
                   <span class="input-group-addon in02"><i class="fa fa-trash-o"></i></span>
-				</div>	
+				</div>	<?php */?>
 			<? }?>
             <form id="form1" action="<?=SITE_URL?>/process.php" method="post" enctype="multipart/form-data">
             <input type="hidden" name="action" value="comment_add">
             <input type="hidden" name="id" value="<?=$id?>">
-            <input type="hidden" name="ref_url" value="<?=$db->encoded(SITE_URL.'/projects-details?show=Tasks')?>" />
+            <input type="hidden" name="ref_url" value="<?=$db->encoded(SITE_URL.'/projects-details?show=Tasks&id='.$id.'')?>" />
                 <p class="task_name03">
                     <textarea class="form-control tarea h25" name="content" id="message-text" placeholder="Write your comment here..." data-bvalidator="required" data-bvalidator-msg="Please enter your comment."></textarea>
                 </p>
@@ -116,7 +126,7 @@ switch ($action_ajax){
         	<form id="form1" action="<?=SITE_URL?>/process.php" method="post" enctype="multipart/form-data">
             <input type="hidden" name="action" value="task_edit">
             <input type="hidden" name="id" value="<?=$result_task[0]['id']?>">
-            <input type="hidden" name="ref_url" value="<?=$db->encoded(SITE_URL.'/projects-details?show=Tasks')?>" />
+            <input type="hidden" name="ref_url" value="<?=$db->encoded(SITE_URL.'/projects-details?show=Tasks&id='.$id.'')?>" />
               <div class="row">
                   <div class="col-sm-12 fld">Title</div>
                   <div class="col-sm-12 val"><input type="text" name="name" value="<?=$result_task[0]['name']?>" class="form-control" id="recipient-name" placeholder="Task title..." data-bvalidator="required" data-bvalidator-msg="Please enter task title."></div>

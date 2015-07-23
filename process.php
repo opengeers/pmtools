@@ -50,6 +50,8 @@ switch ($action){
 
 	
 	case 'task_add':
+		$id=$_POST['id'];
+		if($id!=''){$arvalue['parentid_task']=$db->escapeString($_POST['id']);}
 		$arvalue['name']=$db->escapeString($_POST['name']);
 		$arvalue['content']=$db->escapeString($_POST['content']);
 		$arvalue['proj_estimation_hr']=$db->escapeString($_POST['proj_estimation_hr']);

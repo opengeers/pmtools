@@ -1,4 +1,23 @@
+<script>
+	function show_task_det(id,div,resdiv,action){
+		$('.rowtd').removeClass('active');
+		$('#'+div).addClass('active');
+		$("#ajax_loader").fadeIn("fast");
+		$.ajax({url:"<?=SITE_URL?>/ajax.php",
+			type: "POST",
+			data: {
+				action_ajax : action,
+				id : id
+			},
+			success:function(result){
+				$("#"+resdiv).html(result);
+				$("#ajax_loader").fadeOut("fast");
+			}
+		});
+	}
+</script>
 <? 
+$id=$_REQUEST['id'];
 $show=$_REQUEST['show'];
 $proj_id=$db->decoded($_REQUEST['proj_id']);
 if($proj_id!=''){$_SESSION['proj_id']=$proj_id;}
@@ -96,7 +115,7 @@ $result_notes=$db->getResult();
                     	<div class="col-sm-5 task01">
                         	<div class="proj_task_list">
 <?
-$db->select('post','*','','type="task" AND status="publish" AND parentid="'.$result[0]['id'].'"','id DESC','');
+$db->select('post','*','','type="task" AND status="publish" AND parentid="'.$result[0]['id'].'" AND parentid_task=0','id DESC','');
 $max=$db->numRows();
 ?>						
 <div class="taskalldiv col2hd">
@@ -112,9 +131,9 @@ $max=$db->numRows();
             </select>
         </li>
         <li class="tblcell col02"><button class="btn btn-info btn-xs">Apply</button></li>
-        <li class="tblcell ac w100 col03 newtaskbtn cp" data-toggle="modal" data-target="#ajax_modal"
+        <li class="tblcell ac w50 col03 newtaskbtn cp" data-toggle="modal" data-target="#ajax_modal"
         onclick="show_task_det('','','ajax_modal_result','task_add')"        
-        ><i class="fa fa-plus-circle"></i> New Task</li>
+        ><i class="fa fa-plus-circle"></i> Task</li>
     </ul>    
 </div>	
 <div class="table-responsive">
@@ -130,17 +149,40 @@ if($max>0){
         <? $i=0;foreach($result_task as $key => $val){$i++;?>
             <tr id="tasktr<?=$result_task[$key]['id']?>" class="rowtd <?=($key==0)?'active':''?>" >
                 <td class="w25 ac vt"><input type="checkbox" /></td>
-                <td class="al cp taski<?=$i?>" onclick="show_task_det('<?=$result_task[$key]['id']?>','tasktr<?=$result_task[$key]['id']?>','col2result','task_details_ajax')">
-				[#<?=$result_task[$key]['id']?>] - <?=substr($result_task[$key]['name'],0,120)?><?=(strlen($result_task[$key]['name'])>120)?'...':''?>
-                <?php /*?><p class="task_inf">
-                    <span># <?=$result_task[$key]['id']?></span> | 
-                    <span><?=$result_task[$key]['proj_estimation_hr']?> Hr.</span> |
-                    <span><?=date('D, d M Y h:i:s',strtotime($result_task[$key]['date']))?></span>
-                </p><?php */?>
+                <td class="al cp taski<?=$i?> taskid<?=$result_task[$key]['id']?>" onclick="show_task_det('<?=$result_task[$key]['id']?>','tasktr<?=$result_task[$key]['id']?>','col2result','task_details_ajax')">
+				[<?=$result_task[$key]['id']?>] - 
+				<?=substr($result_task[$key]['name'],0,120)?><?=(strlen($result_task[$key]['name'])>120)?'...':''?>
                 </td>
             </tr>
+
+			<?
+            $db->select('post','*','','type="task" AND status="publish" AND parentid="'.$result[0]['id'].'" AND parentid_task='.$result_task[$key]['id'].'','id DESC','');
+            $max_sub=$db->numRows();
+            if($max_sub>0){
+            $result_task_sub=$db->getResult();	
+            ?>	         
+				<? foreach($result_task_sub as $key_sub => $val_sub){$i++;?>       
+                <tr id="tasktr<?=$result_task_sub[$key_sub]['id']?>" class="rowtd subtasklst <?=($key_sub==0)?'active':''?>" >
+                    <td class="w25 ac vt"><input type="checkbox" /></td>
+                    <td class="al tastdl cp taskid<?=$result_task_sub[$key_sub]['id']?>" onclick="show_task_det('<?=$result_task_sub[$key_sub]['id']?>','tasktr<?=$result_task_sub[$key_sub]['id']?>','col2result','task_details_ajax')">
+                    <i class="fa fa-level-up"></i> [<?=$result_task_sub[$key_sub]['id']?>] - 
+					<?=substr($result_task_sub[$key_sub]['name'],0,120)?><?=(strlen($result_task_sub[$key_sub]['name'])>120)?'...':''?>
+                    </td>
+                </tr>
+                <? }?>
+            <? }?>
+            
+            
         <? }?>
     </table>
+<script>
+	<? if($id!=''){?>
+		$( ".taskid<?=$id?>" ).trigger( "click" );
+	<? }else{?>
+		$( ".taski1" ).trigger( "click" );
+	<? }?>	
+	$("#ajax_loader").fadeOut("fast");
+</script>    
 <? }else{?>
 	<div class="nodata">You have no task.</div>
 <? }?>
@@ -172,25 +214,6 @@ if($max>0){
 
 
 <div class="ajax_loader" id="ajax_loader"><i class="fa fa-circle-o-notch fa-spin"></i> Loading...</div>
-<script>
-	function show_task_det(id,div,resdiv,action){
-		$('.rowtd').removeClass('active');
-		$('#'+div).addClass('active');
-		$("#ajax_loader").fadeIn("fast");
-		$.ajax({url:"<?=SITE_URL?>/ajax.php",
-			type: "POST",
-			data: {
-				action_ajax : action,
-				id : id
-			},
-			success:function(result){
-				$("#"+resdiv).html(result);
-				$("#ajax_loader").fadeOut("fast");
-			}
-		});
-	}
-	$( ".taski1" ).trigger( "click" );
-	$("#ajax_loader").fadeOut("fast");
-</script>
+
 
 
